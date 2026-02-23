@@ -34,29 +34,34 @@ export const registerUser = async (req, res) => {
 
 
 export  const forgotPassword = async (req, res) => {
-  const { email } = req.body;
-  const user = await Password.findOne({ email });
+  try {
+    const { email } = req.body;
+    const user = await Password.findOne({ email });
 
-  if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-  //const token = generateToken;
-  const token = crypto.randomBytes(32).toString("hex");
-  const expiry = Date.now() + 1000 * 60 * 15; 
+    const token = crypto.randomBytes(32).toString("hex");
+    const expiry = Date.now() + 1000 * 60 * 15;
 
-  user.reset_token = token;
-  user.reset_expiry = expiry;
-  await user.save();
+    user.reset_token = token;
+    user.reset_expiry = expiry;
+    await user.save();
 
-  const resetLink = `https://passwordresetfrondend.netlify.app/${token}`;
+    const resetLink = `https://passwordresetfrondend.netlify.app/${token}`;
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Password Reset",
-    html: `<p>Click <a href="${resetLink}">here</a> to reset your password. Link expires in 15 minutes.</p>`
-  });
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Password Reset",
+      html: `<p>Click <a href="${resetLink}">here</a> to reset your password. Link expires in 15 minutes.</p>`
+    });
 
-  res.json({ message: "Password reset link sent to email" });
+    res.json({ message: "Password reset link sent to email" });
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+
 };
 
 export const verifyToken = async (req, res) => {

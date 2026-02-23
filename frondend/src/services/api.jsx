@@ -7,12 +7,23 @@ const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
     });
+    if (!res.ok) {
+      const errorText = await res.text(); // fallback if not JSON
+      throw new Error(`Server error: ${res.status} - ${errorText}`);
+    }
     return res.json();
   },
   get: async (endpoint) => {
     const res = await fetch(`${API_URL}${endpoint}`);
+    if (!res.ok) {
+      const errorText = await res.text(); // fallback if not JSON
+      throw new Error(`Server error: ${res.status} - ${errorText}`);
+    }
+
+
     return res.json();
   }
+  
 };
 
 export default api;
