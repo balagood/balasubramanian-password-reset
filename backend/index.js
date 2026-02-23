@@ -14,7 +14,7 @@ import configDB from "./config/db.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // allow frontend
+  origin: "https://passwordresetfrondend.netlify.app", // allow frontend
   methods: ["GET", "POST","PUT","DELETE"],
   credentials: true
 }));
