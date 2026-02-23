@@ -4,13 +4,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
+  service: "SendGrid",
+  //host: "smtp.gmail.com",
   port: 465,
   secure: true, 
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    api_key: process.env.SENDGRID_API_KEY
+    //user: process.env.EMAIL_USER,
+    //pass: process.env.EMAIL_PASS
   },
   tls: {
     family: 4 // force IPv4
