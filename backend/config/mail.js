@@ -7,7 +7,7 @@ console.log(process.env.EMAIL_USER);
 console.log(process.env.EMAIL_PASS);
 console.log('Checking')
 const transporter = nodemailer.createTransport({
-  service: "Gmail",
+  //service: "Gmail",
   host: "smtp.gmail.com",
   //host: "smtp.sendgrid.net",
   port: 587,
