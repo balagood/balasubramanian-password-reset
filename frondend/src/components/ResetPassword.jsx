@@ -9,7 +9,7 @@ function ResetPassword() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    api.get(`/verify_token/${token}`).then((res) => setMessage(res.data.message));
+    api.get(`/verify_token/${token}`).then((res) => setMessage(res.message));
   }, [token]);
 
   const handleReset = async () => {
