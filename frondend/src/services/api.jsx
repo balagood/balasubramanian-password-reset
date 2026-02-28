@@ -1,4 +1,4 @@
-const API_URL = "https://password-reset-8g5f.onrender.com/";
+const API_URL = "https://password-reset-8g5f.onrender.com";
 
 const api = {
   post: async (endpoint, body) => {
