@@ -2,16 +2,12 @@
 import nodemailer from "nodemailer"
 import dotenv from "dotenv";
 dotenv.config();
-console.log("for checking");
-console.log(process.env.EMAIL_USER);
-console.log(process.env.EMAIL_PASS);
-console.log('Checking')
 const transporter = nodemailer.createTransport({
   //service: "Gmail",
   host: "smtp.gmail.com",
   //host: "smtp.sendgrid.net",
   port: 587,
-  secure: false, 
+  secure: true, 
   auth: {
     //api_key: process.env.SENDGRID_API_KEY
     user: process.env.EMAIL_USER,
