@@ -3,8 +3,8 @@ import nodemailer from "nodemailer"
 import dotenv from "dotenv";
 dotenv.config();
 console.log("for checking");
-conole.log(process.env.EMAIL_USER);
-conole.log(process.env.EMAIL_PASS);
+console.log(process.env.EMAIL_USER);
+console.log(process.env.EMAIL_PASS);
 console.log('Checking')
 const transporter = nodemailer.createTransport({
   service: "Gmail",
