@@ -8,6 +8,8 @@ import transporter from "../config/mail.js";
 import generateToken from "../utils/generate.token.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import { BrevoClient } from '@getbrevo/brevo'
+import SibApiV3Sdk  from "sib-api-v3-sdk";
 
 export const registerUser = async (req, res) => {
   try {
@@ -49,13 +51,36 @@ export  const forgotPassword = async (req, res) => {
 
     const resetLink = `https://passwordresetfrondend.netlify.app/${token}`;
 
-    await transporter.sendMail({
+    /* await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Password Reset",
       html: `<p>Click <a href="${resetLink}">here</a> to reset your password. Link expires in 15 minutes.</p>`
-    });
+    }); */
 
+    var defaultClient = SibApiV3Sdk.ApiClient.instance;
+    var apiKey = defaultClient.authentications['api-key'];
+    apiKey.apiKey = process.env.BREVO_API_KEY;
+    var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+    await apiInstance.sendTransacEmail({
+          sender: {
+            email: process.env.EMAIL_USER,
+            name: 'Testing',
+          },
+          to: [
+            {
+              email: email,
+            },
+          ],
+          subject: "Reset your password",
+          htmlContent: `
+            <p>You requested a password reset.</p>
+            <p>Click the link below to reset your password:</p>
+            <a href="${resetLink}">${resetLink}</a>
+            <p>This link expires in 10 minutes.</p>
+          `,
+        });
+    
     res.json({ message: "Password reset link sent to email" });
   } catch (err) {
     console.error("Forgot password error:", err);
