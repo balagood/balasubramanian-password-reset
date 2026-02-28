@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   //service: "Gmail",
   host: "smtp.gmail.com",
   //host: "smtp.sendgrid.net",
-  port: 587,
+  port: 465,
   secure: true, 
   auth: {
     //api_key: process.env.SENDGRID_API_KEY
@@ -15,9 +15,6 @@ const transporter = nodemailer.createTransport({
    // user: "apikey",
    // pass: process.env.SENDGRID_API_KEY
 
-  },tls: {
-    rejectUnauthorized: false, // ⚠️ disables certificate validation
   },
-
 });
 export default transporter;
