@@ -14,7 +14,7 @@ function ResetPassword() {
 
   const handleReset = async () => {
     const res = await api.post("/reset_password", { token, newPassword });
-    setMessage(res.data.message);
+    setMessage(res.message);
   };
 
   return (
