@@ -9,11 +9,11 @@ function ResetPassword() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    api.get(`/verify-token/${token}`).then((res) => setMessage(res.message));
+    api.get(`/verify_token/${token}`).then((res) => setMessage(res.message));
   }, [token]);
 
   const handleReset = async () => {
-    const res = await api.post("/reset-password", { token, newPassword });
+    const res = await api.post("/reset_password", { token, newPassword });
     setMessage(res.message);
   };
 

@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/register", registerUser);  
 router.post("/forgot-password", forgotPassword);
-router.get("/verify-token/:token", verifyToken);
-router.post("/reset-password", resetPassword);
+router.get("/verify_token/:token", verifyToken);
+router.post("/reset_password", resetPassword);
 
 export default router;

@@ -49,7 +49,7 @@ export  const forgotPassword = async (req, res) => {
     user.reset_expiry = expiry;
     await user.save();
 
-    const resetLink = `https://passwordresetfrondend.netlify.app/verify-token/${token}`;
+    const resetLink = `https://passwordresetfrondend.netlify.app/verify_token/${token}`;
 
     /* await transporter.sendMail({
       from: process.env.EMAIL_USER,
