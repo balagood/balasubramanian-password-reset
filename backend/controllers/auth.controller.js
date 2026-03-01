@@ -11,6 +11,25 @@ import crypto from "crypto";
 import { BrevoClient } from '@getbrevo/brevo'
 import SibApiV3Sdk  from "sib-api-v3-sdk";
 
+
+export const loginUser = async(req,res)=>{
+    try{
+      const { email, password } = req.body;
+      const existingUser = await Password.findOne({ email });
+      if (!existingUser) {
+        return res.status(400).json({ message: "Invalid user" });
+      }  
+      const isMatch = await bcrypt.compare(password, existingUser.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid user" });
+      }
+      res.json({ message: "Valid user" });
+    }catch(error){
+       res.status(500).json({ message: "Server error" });
+
+    }
+};
+
 export const registerUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -50,6 +69,7 @@ export  const forgotPassword = async (req, res) => {
     await user.save();
 
     const resetLink = `https://passwordresetfrondend.netlify.app/verify_token/${token}`;
+    //const resetLink = `http://localhost:5173/verify_token/${token}`;
 
     /* await transporter.sendMail({
       from: process.env.EMAIL_USER,

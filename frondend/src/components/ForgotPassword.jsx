@@ -8,7 +8,7 @@ function ForgotPassword() {
 
   const handleSubmit = async () => {
     
-    const res = await api.post("/forgot-password", { email });
+    const res = await api.post("/forgot_password", { email });
     setMessage(res.message);
   };
 

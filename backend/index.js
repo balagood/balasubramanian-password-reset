@@ -15,9 +15,14 @@ const app = express();
 
 app.use(cors({
   origin: "https://passwordresetfrondend.netlify.app", // allow frontend
+  //origin: ["http://localhost:5173", "https://passwordresetfrondend.netlify.app"],// allow frontend
   methods: ["GET", "POST","PUT","DELETE"],
   credentials: true
 }));
+
+app.post("/register", (req, res) => {
+  res.json({ message: "User registered successfully" });
+});
 
 app.use(bodyParser.json());
 app.use("/", authRoutes);
