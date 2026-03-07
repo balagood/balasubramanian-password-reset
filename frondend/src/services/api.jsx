@@ -3,7 +3,6 @@ const API_URL = "https://password-reset-8g5f.onrender.com";
 
 const api = {
   post: async (endpoint, body) => {
-    console.log(API_URL.endpoint);
     const res = await fetch(`${API_URL}${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

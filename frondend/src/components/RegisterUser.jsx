@@ -17,9 +17,9 @@ function RegisterUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await api.post("/register", {formData});
-      setMessage(res.message);
-      if(res.message == "User created successfully"){setTimeout(() => {navigate("/") }, 1500);}
+    const res = await api.post("/register", formData);
+    setMessage(res.message);
+    if(res.message == "User created successfully"){setTimeout(() => {navigate("/") }, 2500);} 
     } catch (err) {
        setMessage(err.message);
     }

@@ -6,4 +6,6 @@ const passwordSchema = new mongoose.Schema({
   reset_expiry: { type: Date, default: null }
 });
 
-export default mongoose.model("Password", passwordSchema);
+
+export default mongoose.models.User || mongoose.model('Password',passwordSchema)
+//export default mongoose.model("Password", passwordSchema);

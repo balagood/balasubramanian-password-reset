@@ -20,9 +20,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.post("/register", (req, res) => {
-  res.json({ message: "User registered successfully" });
-});
+
 
 app.use(bodyParser.json());
 app.use("/", authRoutes);
